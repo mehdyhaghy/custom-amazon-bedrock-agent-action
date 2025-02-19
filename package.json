@@ -9,9 +9,9 @@
     "author": "John Reilly Pospos",
     "license": "MIT",
     "dependencies": {
-        "@actions/core": "^1.10.1",
-        "@actions/github": "^5.1.1",
-        "@aws-sdk/client-bedrock-agent-runtime": "^3.405.0",
-        "minimatch": "^5.1.2"
+        "@actions/core": "^1.11.1",
+        "@actions/github": "^6.0.0",
+        "@aws-sdk/client-bedrock-agent-runtime": "^3.751.0",
+        "minimatch": "^10.0.1"
     }
 }
