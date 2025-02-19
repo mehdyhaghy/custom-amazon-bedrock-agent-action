@@ -113,7 +113,9 @@ async function main() {
         const relevantCode = [];
         const relevantDiffs = [];
         await Promise.all(changedFiles.map(file => processFile(file, allIgnorePatterns, relevantCode, relevantDiffs, owner, repo, eventName, eventName === 'pull_request' ? comments : undefined)));
-
+        core.warning('ignoreList: ' + allIgnorePatterns);
+        core.warning('changedFiles: ' + changedFiles);
+        core.warning('eventName: ' + eventName);
         // Check if there are any relevant code or diffs to analyze
         if (relevantDiffs.length === 0 && relevantCode.length === 0) {
             core.warning(`[${getTimestamp()}] No relevant files or diffs found for analysis.`);
