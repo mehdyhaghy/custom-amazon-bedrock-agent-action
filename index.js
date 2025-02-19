@@ -87,7 +87,7 @@ async function main() {
         
             changedFiles = comparison.files;
         } else {
-            core.setFailed(`Unsupported event type: ${eventName}`);
+            core.setFailed(`Unsupported event type:  ${eventName}`);
             return;
         }
 
