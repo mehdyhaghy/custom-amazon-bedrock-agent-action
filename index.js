@@ -12,7 +12,6 @@ const agentWrapper = new BedrockAgentRuntimeWrapper();
 async function main() {
     try {
         core.info(`[${getTimestamp()}] Starting GitHub Action`);
-
         // Ensure required environment variables are set
         const requiredEnvVars = ['GITHUB_TOKEN', 'GITHUB_REPOSITORY'];
         if (requiredEnvVars.some(varName => !process.env[varName])) {
@@ -76,7 +75,8 @@ async function main() {
                 repo
             });
             const defaultBranch = repoInfo.default_branch;
-        
+            core.info(' repo default Branch'+defaultBranch);
+
             // Fetch all changes in the branch compared to the default branch
             const { data: comparison } = await octokit.rest.repos.compareCommits({
                 owner,
@@ -112,10 +112,11 @@ async function main() {
         // Initialize arrays to store relevant code and diffs
         const relevantCode = [];
         const relevantDiffs = [];
+        core.info('ignoreList: ' + allIgnorePatterns);
+        core.info(changedFiles);
+        core.info(`[${getTimestamp()}] Retrieved ${changedFiles.length} changed files`);
         await Promise.all(changedFiles.map(file => processFile(file, allIgnorePatterns, relevantCode, relevantDiffs, owner, repo, eventName, eventName === 'pull_request' ? comments : undefined)));
-        core.warning('ignoreList: ' + allIgnorePatterns);
-        core.warning('changedFiles: ' + changedFiles);
-        core.warning('eventName: ' + eventName);
+
         // Check if there are any relevant code or diffs to analyze
         if (relevantDiffs.length === 0 && relevantCode.length === 0) {
             core.warning(`[${getTimestamp()}] No relevant files or diffs found for analysis.`);
