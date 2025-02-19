@@ -75,7 +75,7 @@ async function main() {
                 repo
             });
             const defaultBranch = repoInfo.default_branch;
-            core.info(' repo default Branch'+defaultBranch);
+            core.info(' repo default Branch: [${defaultBranch}]');
 
             // Fetch all changes in the branch compared to the default branch
             const { data: comparison } = await octokit.rest.repos.compareCommits({
